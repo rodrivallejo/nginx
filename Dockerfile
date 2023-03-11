@@ -10,9 +10,10 @@ ENV PORT 80
 ENV CLIENT_MAX_BODY_SIZE 1m
 ENV PROXY_READ_TIMEOUT 60s
 ENV WORKER_PROCESSES auto
-ADD files/my.crt /etc/ssl/my.crt
-ADD files/my.key /etc/ssl/my.key
-ADD files/my.csr /etc/ssl/my.csr
+
+COPY files/my.crt /etc/ssl/my.crt
+COPY files/my.key /etc/ssl/my.key
+
 COPY files/run.sh /
 COPY files/nginx.conf.tmpl /
 
