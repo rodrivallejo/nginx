@@ -2,3 +2,7 @@
 !Dockerfile
 !files/run.sh
 !files/nginx.conf.tmpl
+!files/my.crt
+!files/my.key!
+!my.crt
+!my.key
