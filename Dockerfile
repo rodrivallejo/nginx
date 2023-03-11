@@ -14,7 +14,7 @@ ENV WORKER_PROCESSES auto
 COPY files/run.sh /
 COPY files/nginx.conf.tmpl /
 
-
+RUN chmod +x /run.sh
 STOPSIGNAL SIGQUIT
 
 ENTRYPOINT ["/run.sh"]
