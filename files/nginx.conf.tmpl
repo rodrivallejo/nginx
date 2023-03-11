@@ -12,13 +12,29 @@ http {
   access_log /dev/stdout;
 
   server {
-    listen ##PORT##;
+    listen ##PORT## ssl http2;
     server_name ##SERVER_NAME##;
     ssl_certificate /etc/ssl/my.crt;
     ssl_certificate_key /etc/ssl/my.key;
     client_max_body_size ##CLIENT_MAX_BODY_SIZE##;
     proxy_read_timeout ##PROXY_READ_TIMEOUT##;
 
+     location /google {
+      proxy_pass https://google.es;
+      proxy_set_header Host  $host;
+      proxy_read_timeout     60;
+      proxy_connect_timeout  60;
+      proxy_redirect         off;
+
+     # Allow the use of websockets
+      proxy_http_version 1.1;
+      proxy_set_header Upgrade $http_upgrade;
+      proxy_set_header Connection 'upgrade';
+      proxy_set_header Host $host;
+      proxy_cache_bypass $http_upgrade;
+      proxy_buffering off;
+       
+     }
 
     location / {
         root   /usr/share/nginx/html;
